@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+}
+
+.title {
+    // margin-bottom: 15px;
+    text-align: center;
+    h1 {
+        font-size: 40px;
+        font-weight: 300;
+    }
+    span {
+        font-size: 20px;
+        font-weight: 300;
+    }
+}
+
+form label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+button {
+    margin-top: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+input {
+    padding: 12px 10px;
+    border-radius: 8px;
+    font-size: 18px;
+    border: 2px solid $black;
+}
+
+input:focus {
+    &::placeholder {
+        font-size: 0;
+    }
+}
