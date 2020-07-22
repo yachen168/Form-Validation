@@ -18,20 +18,32 @@
 			<div class="row">
 				<div class="col">
 					<label for="birthDate">Birth Date <span>(optional)</span></label>
-					<div class="birthDate-inputs">
-							<input type="number" placeholder="YYYY" min="1900" max="2020">
-							<input type="number" placeholder="MM" min="1900" max="2020">
-							<input type="number" placeholder="DD" min="1900" max="2020">
+						<div class="row">
+							<div class="col-4">
+								<input type="number" placeholder="YYYY" min="1900" max="2020">
+							</div>
+							<div class="col-4">
+								<input type="number" placeholder="MM" min="01" max="12">
+							</div>
+							<div class="col-4">
+								<input type="number" placeholder="DD" min="01" max="31">
+							</div>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
 					<label for="address">Address*</label>
-					<div class="address-inputs">
+					<div class="row">
+						<div class="col-6">
 							<input type="address" placeholder="City">
+						</div>
+						<div class="col-6">
 							<input type="address" placeholder="Dist">
+						</div>
+						<div class="col">
 							<input type="address" placeholder="Address Detail">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -47,20 +59,5 @@
 </script>
 
 <style lang="scss" scoped>
-.birthDate-inputs {
-	display: flex;
-	justify-content: space-between;
-	input:not(:last-child) {
-		margin-right: 20px;
-	}
-}
 
-.address-inputs {
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	input:not(:last-child) {
-		width: calc(50% - 10px);
-	}
-}
 </style>
