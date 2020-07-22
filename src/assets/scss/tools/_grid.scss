@@ -1,0 +1,25 @@
+// 12 欄網格
+.row {
+    display: flex;
+    margin: 0 -10px;
+}
+
+[class^="col"] {
+    padding: 0 10px;
+}
+
+.col {
+    flex: 0 0 100%;
+}
+
+.col-6 {
+    flex: 0 0 50%;
+}
+
+.col-4 {
+    flex: 0 0 33.333%;
+}
+
+.col-3 {
+    flex: 0 0 25%;
+}

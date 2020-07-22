@@ -14,7 +14,8 @@
 <style lang="scss">
 
 #nav {
-  padding: 30px;
+	padding: 30px;
+	text-align: center;
 
   a {
     font-weight: bold;
