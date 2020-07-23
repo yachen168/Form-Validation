@@ -18,15 +18,10 @@
 				setTimeoutId: null
 			}
 		},
-		methods: {
-			redirectToHomePage(){
-				this.setTimeoutId = setTimeout(()=>{
+		created(){
+			this.setTimeoutId = setTimeout(()=>{
 					this.$router.push({name: 'Home'})
 				},5000)
-			}
-		},
-		created() {
-			this.redirectToHomePage();
 		},
 		beforeDestroy() {
 			clearTimeout(this.setTimeoutId);
