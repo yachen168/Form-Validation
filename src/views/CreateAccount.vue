@@ -19,7 +19,7 @@
 					<div>
 						<label for="password">Password</label>
 						<input type="password" class="warn" placeholder="●●●●●●">
-						<Tooltip>MINIMUN 8 CHARACTERS</Tooltip>
+						<Tooltip :title="title">MINIMUN 8 CHARACTERS</Tooltip>
 					</div>
 				</div>
 			</div>
@@ -43,6 +43,19 @@ import Tooltip from '@/components/toolTip'
 export default {
 	components: {
 		Tooltip
+	},
+	data(){
+		return {
+			account: null,
+			password: null,
+			comfirmPassword: null,
+			title: 'yachen'
+		}
+	},
+	computed: {
+		toggleButton(){
+			return 123;
+		}
 	}
 }
 </script>
