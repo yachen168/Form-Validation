@@ -33,6 +33,12 @@ const routes = [{
         component: () =>
             import ('@/views/Completed')
     },
+    {
+        path: '*',
+        name: '404',
+        component: () =>
+            import ('@/views/404NotFound')
+    }
 
 ]
 
