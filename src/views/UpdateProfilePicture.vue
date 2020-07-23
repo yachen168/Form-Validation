@@ -19,13 +19,17 @@
 			</span>		
 			<span>ONE FILE IS OVER THE MAXIMUM SIZE</span>
 		</div>
-		<button>SUBMIT & NEXT</button>	
+		<button @click="toNextPage">SUBMIT & NEXT</button>	
 	</form>
 </template>
 
 <script>
 	export default {
-		
+		methods: {
+			toNextPage(){
+				this.$router.push({name: 'PaymentMethod'});
+			}
+		}
 	}
 </script>
 

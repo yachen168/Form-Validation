@@ -47,7 +47,7 @@
 					</div>
 				</div>
 			</div>
-			<button>SUBMIT & NEXT</button>
+			<button @click="toNextPage">SUBMIT & NEXT</button>
 		</form>
 
 	</div>
@@ -55,6 +55,11 @@
 
 <script>
 	export default {
+		methods: {
+			toNextPage(){
+				this.$router.push({name: 'UpdateProfilePicture'})
+			}
+		},
 	}
 </script>
 

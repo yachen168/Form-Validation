@@ -38,14 +38,18 @@
 					</div>
 				</div>
 			</div>
-			<button>Done</button>
+			<button @click="toNextPage">Done</button>
 		</form>
 	</div>
 </template>
 
 <script>
 	export default {
-		
+		methods:{
+			toNextPage(){
+				this.$router.push({name: 'Completed'})
+			}
+		}
 	}
 </script>
 
