@@ -13,7 +13,16 @@
 
 <script>
 	export default {
-		
+		methods: {
+			redirectToHomePage(){
+				setTimeout(()=>{
+					this.$router.push({name: 'Home'})
+				},5000)
+			}
+		},
+		created() {
+			this.redirectToHomePage();
+		}
 	}
 </script>
 

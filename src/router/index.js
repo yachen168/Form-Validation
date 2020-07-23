@@ -34,12 +34,17 @@ const routes = [{
             import ('@/views/Completed')
     },
     {
+        path: '/Home',
+        name: 'Home',
+        component: () =>
+            import ('@/views/Home')
+    },
+    {
         path: '*',
         name: '404',
         component: () =>
             import ('@/views/404NotFound')
     }
-
 ]
 
 const router = new VueRouter({
