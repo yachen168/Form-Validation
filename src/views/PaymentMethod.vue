@@ -7,8 +7,14 @@
 		<form action="">
 			<div class="row">
 				<div class="col">
-					<label for="cardNumber">Card Number</label>
-					<input type="number" placeholder="1234 5678 9012 3456">
+					<div>
+						<label for="cardNumber">Card Number</label>
+						<input :class="isCardNumInputWarn ? '' : 'warn'"
+										type="number" 
+										placeholder="1234 5678 9012 3456"
+										v-model="cardNumber">
+						<ToolTip v-if="!isCardNumInputWarn">INVALID NUMBER</ToolTip>
+					</div>
 				</div>
 			</div>
 			<div class="row">
@@ -17,8 +23,14 @@
 					<input type="text" placeholder="EXAMPLE NAME">
 				</div>
 				<div class="col-6">
-					<label for="bankName">Bank Namer</label>
-					<input type="email" placeholder="EXAMPLE BANK">
+					<div>
+						<label for="bankName">Bank Name</label>
+						<input :class="isBankNameInputWarn ? '' : 'warn'" 
+										type="email" 
+										placeholder="EXAMPLE BANK"
+										v-model="bankName">
+						<ToolTip v-if="!isBankNameInputWarn">REQUIRED FILED</ToolTip>
+					</div>
 				</div>
 			</div>
 			<div class="row">
@@ -38,16 +50,41 @@
 					</div>
 				</div>
 			</div>
-			<button @click="toNextPage">Done</button>
+			<button :class="isButtonDisabled ? '' : 'disabled'" @click="toNextPage">Done</button>
 		</form>
 	</div>
 </template>
 
 <script>
+import ToolTip from '@/components/toolTip'
+
 	export default {
-		methods:{
+		components: {
+			ToolTip
+		},
+		data(){
+			return {
+				cardNumber: null,
+				bankName: null
+			}
+		},
+		methods: {
 			toNextPage(){
-				this.$router.push({name: 'Completed'})
+				if(this.isButtonDisabled){
+						this.$router.push({name: 'Completed'});
+				}
+			}
+		},
+		computed: {
+			isCardNumInputWarn(){
+				const isCardNumPass = /^\d{16}$/;
+				return isCardNumPass.test(this.cardNumber);
+			},
+			isBankNameInputWarn(){
+				return !!this.bankName;
+			},
+			isButtonDisabled(){
+				return this.isCardNumInputWarn && this.isBankNameInputWarn;
 			}
 		}
 	}
