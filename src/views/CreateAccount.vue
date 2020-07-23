@@ -9,8 +9,11 @@
 				<div class="col">
 					<div>
 						<label for="account">Account</label>
-						<input type="email" class="warn" placeholder="example@email.com">
-						<Tooltip>INVALID EMAIL</Tooltip>
+						<input type="email"
+						:class="isAccountInputWarn ? '' : 'warn'"
+						v-model="account"
+						placeholder="example@email.com">
+						<Tooltip v-if="!isAccountInputWarn">INVALID EMAIL</Tooltip>
 					</div>
 				</div>
 			</div>
@@ -18,8 +21,11 @@
 				<div class="col">
 					<div>
 						<label for="password">Password</label>
-						<input type="password" class="warn" placeholder="●●●●●●">
-						<Tooltip :title="title">MINIMUN 8 CHARACTERS</Tooltip>
+						<input type="password" 
+						:class="isPasswordInputWarn ? '' : 'warn'" 
+						placeholder="●●●●●●"
+						v-model="password">
+						<Tooltip v-if="!isPasswordInputWarn">MINIMUN 8 CHARACTERS</Tooltip>
 					</div>
 				</div>
 			</div>
@@ -27,12 +33,17 @@
 				<div class="col">
 					<div>
 						<label for="comfirmPassword">Comfirm Password</label>
-						<input type="password" class="warn" placeholder="●●●●●●">
-						<Tooltip>NOT MATCH</Tooltip>
+						<input type="password" 
+						:class="isComfirmPasswordInputWarn ? '': 'warn'" 
+						placeholder="●●●●●●"
+						v-model="comfirmPassword">
+						<Tooltip v-if="!isComfirmPasswordInputWarn">NOT MATCH</Tooltip>
 					</div>
 				</div>
 			</div>
-			<button class="disabled">SUBMIT & NEXT</button>
+			<button :class="isButtonDisabled ? '' : 'disabled'"
+							@click="toNextPage"
+							>SUBMIT & NEXT</button>
 		</form>
   </div>
 </template>
@@ -49,13 +60,31 @@ export default {
 			account: null,
 			password: null,
 			comfirmPassword: null,
-			title: 'yachen'
+		}
+	},
+	methods: {
+		toNextPage(){
+			if(this.isButtonDisabled) {
+				this.$router.push({name: 'GeneralInfomation'});
+			}
 		}
 	},
 	computed: {
-		toggleButton(){
-			return 123;
-		}
+		isAccountInputWarn(){
+			const isAccountPass = /^[A-z0-9]+@[A-z]+\.com{1}$/;
+			return isAccountPass.test(this.account);
+		},
+		isPasswordInputWarn(){
+			const isPasswordPass = /^[\d|A-z]{8}/;
+			console.log(this.password)
+			return isPasswordPass.test(this.password);
+		},
+		isComfirmPasswordInputWarn(){
+			return (this.comfirmPassword === this.password);
+		},
+		isButtonDisabled(){
+			return this.isAccountInputWarn && this.isPasswordInputWarn && this.isComfirmPasswordInputWarn;
+		},
 	}
 }
 </script>
