@@ -11,8 +11,14 @@
 					<input type="text" placeholder="Example Name">
 				</div>
 				<div class="col-6">
-					<label for="phone">Phone*</label>
-					<input type="text" placeholder="0912 345 678">
+					<div>
+						<label for="phone">Phone*</label>
+						<input :class="isPhoneInputWarn ? '' : 'warn'" 
+										type="text" 
+										placeholder="0912 345 678"
+										v-model="phoneNumber">
+						<Tooltip v-if="!isPhoneInputWarn">NUMBERS ONLY</Tooltip>
+					</div>
 				</div>
 			</div>
 			<div class="row">
@@ -42,24 +48,55 @@
 							<input type="address" placeholder="Dist">
 						</div>
 						<div class="col">
-							<input type="address" placeholder="Address Detail">
+							<div>
+								<input :class="isAddressDetailInputWarn ? '' : 'warn'" 
+												type="address" 
+												placeholder="Address Detail"
+												v-model="addressDetail">
+								<Tooltip v-if="!isAddressDetailInputWarn">REQUIRED FILED</Tooltip>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<button @click="toNextPage">SUBMIT & NEXT</button>
+			<button :class="isButtonDisabled ? '' : 'disabled'" @click="toNextPage">SUBMIT & NEXT</button>
 		</form>
 
 	</div>
 </template>
 
 <script>
+import Tooltip from '@/components/toolTip'
+
 	export default {
+		components: {
+			Tooltip
+		},
+		data(){
+			return {
+				phoneNumber: null,
+				addressDetail: null
+			} 
+		},
 		methods: {
 			toNextPage(){
-				this.$router.push({name: 'UpdateProfilePicture'})
+				if (this.isButtonDisabled){
+					this.$router.push({name: 'UpdateProfilePicture'});
+				}
 			}
 		},
+		computed: {
+			isPhoneInputWarn(){
+				const isPhoneNumPass = /^09[0-9]{8}$/;
+				return isPhoneNumPass.test(this.phoneNumber);
+			},
+			isAddressDetailInputWarn(){
+				return !!this.addressDetail;
+			},
+			isButtonDisabled(){
+				return this.isPhoneInputWarn && this.isAddressDetailInputWarn;
+			}
+		}
 	}
 </script>
 
