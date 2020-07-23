@@ -13,15 +13,23 @@
 
 <script>
 	export default {
+		data(){
+			return {
+				setTimeoutId: null
+			}
+		},
 		methods: {
 			redirectToHomePage(){
-				setTimeout(()=>{
+				this.setTimeoutId = setTimeout(()=>{
 					this.$router.push({name: 'Home'})
 				},5000)
 			}
 		},
 		created() {
 			this.redirectToHomePage();
+		},
+		beforeDestroy() {
+			clearTimeout(this.setTimeoutId);
 		}
 	}
 </script>
