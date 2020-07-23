@@ -3,10 +3,10 @@ import App from './App.vue'
 import router from './router'
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faImages, faSmile } from "@fortawesome/free-solid-svg-icons";
+import { faImages, faSmile, faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faImages, faSmile);
+library.add(faImages, faSmile, faExclamationTriangle);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.config.productionTip = false

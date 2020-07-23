@@ -10,8 +10,14 @@
 			</span>
 			<div>
 				<p>UPLOAD UP TO 3 PHOTOS</p>
-				<span>MAXIMUM SIZE: 150*150px</span>
+				<span class="maximum-size">MAXIMUM SIZE: 150*150px</span>
 			</div>
+		</div>
+		<div class="warn-oversize">
+			<span>
+				<font-awesome-icon icon="exclamation-triangle" />
+			</span>		
+			<span>ONE FILE IS OVER THE MAXIMUM SIZE</span>
 		</div>
 		<button>SUBMIT & NEXT</button>	
 	</form>
@@ -37,8 +43,26 @@
 }
 .icon-wrapper {
 	margin-right: 20px;
-	font-size: 45px;
+	font-size: 48px;
 }
+
+.maximum-size {
+	font-size: 12px;
+}
+
+.warn-oversize {
+	padding: 12px 0;
+	margin-top: 25px;
+	text-align: center;
+	letter-spacing: 1px;
+	color: $white;
+	background-color: $orange;
+	border-radius: 8px;
+	span:first-child {
+		margin-right: 10px;
+	}
+}
+
 p {
 	margin: 0;
 }
