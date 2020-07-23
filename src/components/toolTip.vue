@@ -19,7 +19,7 @@
 	position: absolute;
 	padding: 5px 8px;
 	left: calc(100% + 14px);
-	top: 42%;
+	bottom: 32px;
 	background-color: $orange;
 	font-size: 12px;
 	color: $white;
