@@ -59,7 +59,9 @@
 					</div>
 				</div>
 			</div>
-			<button :class="isButtonDisabled ? '' : 'disabled'" @click="toNextPage">SUBMIT & NEXT</button>
+			<button :class="isButtonDisabled ? '' : 'disabled'" 
+							@click="toNextPage"
+							type="submit">SUBMIT & NEXT</button>
 		</form>
 
 	</div>
@@ -88,7 +90,7 @@ import Tooltip from '@/components/toolTip'
 		computed: {
 			isPhoneInputWarn(){
 				const isPhoneNumPass = /^09[0-9]{8}$/;
-				return isPhoneNumPass.test(this.phoneNumber);
+				return !this.phoneNumber || isPhoneNumPass.test(this.phoneNumber);
 			},
 			isAddressDetailInputWarn(){
 				return !!this.addressDetail;

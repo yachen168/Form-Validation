@@ -42,7 +42,8 @@
 				</div>
 			</div>
 			<button :class="isButtonDisabled ? '' : 'disabled'"
-							@click="toNextPage"
+							type="submit"
+							@click.prevent="toNextPage"
 							>SUBMIT & NEXT</button>
 		</form>
   </div>
@@ -72,18 +73,22 @@ export default {
 	computed: {
 		isAccountInputWarn(){
 			const isAccountPass = /^[A-z0-9]+@[A-z]+\.com{1}$/;
-			return isAccountPass.test(this.account);
+			return !this.account || isAccountPass.test(this.account);
 		},
 		isPasswordInputWarn(){
 			const isPasswordPass = /^[\d|A-z]{8}/;
-			console.log(this.password)
-			return isPasswordPass.test(this.password);
+			return !this.password || isPasswordPass.test(this.password);
 		},
 		isComfirmPasswordInputWarn(){
-			return (this.comfirmPassword === this.password);
+			return !this.comfirmPassword || (this.comfirmPassword === this.password);
 		},
 		isButtonDisabled(){
-			return this.isAccountInputWarn && this.isPasswordInputWarn && this.isComfirmPasswordInputWarn;
+			return this.account &&
+						this.password &&
+						this.comfirmPassword && 
+						this.isAccountInputWarn && 
+						this.isPasswordInputWarn && 
+						this.isComfirmPasswordInputWarn;
 		},
 	}
 }
