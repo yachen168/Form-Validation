@@ -10,10 +10,10 @@ const routes = [{
         component: CreateAccount
     },
     {
-        path: '/GeneralInfomation',
-        name: 'GeneralInfomation',
+        path: '/GeneralInformation',
+        name: 'GeneralInformation',
         component: () =>
-            import ('@/views/GeneralInfomation')
+            import ('@/views/GeneralInformation')
     },
     {
         path: '/UpdateProfilePicture',

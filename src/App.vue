@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/GeneralInfomation">GeneralInfomation</router-link> |
+      <router-link to="/GeneralInformation">GeneralInformation</router-link> |
 			<router-link to="/UpdateProfilePicture">UpdateProfilePicture</router-link> |
 			<router-link to="/PaymentMethod">PaymentMethod</router-link> |
 			<router-link to="/Completed">Completed</router-link>
