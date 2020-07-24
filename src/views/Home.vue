@@ -16,5 +16,9 @@
 		margin: 0 auto;
 		position: relative;
 		text-align: center;
+		img{
+			width: 200px;
+			margin-top: 100px;
+		}
 	}
 </style>

@@ -2,15 +2,12 @@
 	<div class="tooltip">
 		<font-awesome-icon icon="exclamation-triangle" />
 		<slot></slot>
-		{{title}}
 	</div>
 </template>
 
 <script>
 	export default {
-		props: {
-			title: String
-		}
+
 	}
 </script>
 
