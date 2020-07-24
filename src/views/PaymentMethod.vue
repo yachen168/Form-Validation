@@ -2,7 +2,7 @@
 	<div>
 		<div class="title">
 			<h1>Payment Method</h1>
-			<span>Add your credit card infomation!</span>
+			<span>Add your credit card information!</span>
 		</div>
 		<form action="">
 			<div class="row">

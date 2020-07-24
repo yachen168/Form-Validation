@@ -5,12 +5,15 @@
 			<span>We wanna know you more!</span>
 		</div>	
 		<div class="upload">
-			<span class="icon-wrapper">
-				<font-awesome-icon icon="images" />
-			</span>
-			<div>
-				<p>UPLOAD UP TO 3 PHOTOS</p>
-				<span class="maximum-size">MAXIMUM SIZE: 150*150px</span>
+			<input class="upload-input-hidden" type="file">
+			<div class="upload-input">
+				<span class="icon-wrapper">
+					<font-awesome-icon icon="images" />
+				</span>
+				<div>
+					<p>UPLOAD UP TO 3 PHOTOS</p>
+					<span class="maximum-size">MAXIMUM SIZE: 150*150px</span>
+				</div>
 			</div>
 		</div>
 		<div class="warn-oversize">
@@ -35,16 +38,28 @@
 
 <style lang="scss" scoped>
 .upload {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	position: relative;
 	max-width: 460px;
 	margin: 20px auto 0;
 	padding: 35px 0;
 	border: 2px solid $black;
 	border-radius: 8px;
 	color: $gray;
+	&-input {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		pointer-events: none;
+	}
+	&-input-hidden {
+		position: absolute;
+		height: 100%;
+		top: 0;
+		left: 0;
+		opacity: 0;
+	}
 }
+
 .icon-wrapper {
 	margin-right: 20px;
 	font-size: 48px;
