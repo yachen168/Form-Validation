@@ -22,7 +22,33 @@
 			</span>		
 			<span>ONE FILE IS OVER THE MAXIMUM SIZE</span>
 		</div>
-		<button @click="toNextPage">SUBMIT & NEXT</button>	
+		<section class="row images-uploaded">
+			<div class="col-4">
+				<div class="item">
+					<img src="https://image.flaticon.com/icons/svg/3089/3089380.svg" alt="">
+					<div class="delete-images">
+						<font-awesome-icon icon="trash-alt" />
+					</div>
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="item">
+					<img src="" alt="">
+					<div class="delete-images">
+						<font-awesome-icon icon="trash-alt" />
+					</div>
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="item">
+					<img src="" alt="">
+					<div class="delete-images">
+						<font-awesome-icon icon="trash-alt" />
+					</div>
+				</div>
+			</div>
+		</section>
+		<button @click.prevent="toNextPage">SUBMIT & NEXT</button>	
 	</form>
 </template>
 
@@ -60,6 +86,10 @@
 	}
 }
 
+p {
+	margin: 0;
+}
+
 .icon-wrapper {
 	margin-right: 20px;
 	font-size: 48px;
@@ -82,7 +112,40 @@
 	}
 }
 
-p {
-	margin: 0;
+.images-uploaded {
+	margin-top: 25px;
+	margin-bottom: 20px;
+	.item {
+		position: relative;
+		height: 100%;
+		border-radius: 8px;
+		overflow: hidden;
+		border: 1px solid #000;
+		img {
+			width: 100%;
+			vertical-align: top;
+		}
+	}
+	.delete-images {
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 50px;
+		bottom: 0;
+		background-color: $blue-200;
+		font-size: 20px;
+		color: $white;
+		opacity: 0;
+		cursor: pointer;
+		transition: 0.3s;
+	}
+}
+
+.item:hover {
+	.delete-images {
+		opacity: 1;
+	}
 }
 </style>
