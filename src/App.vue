@@ -7,7 +7,9 @@
 			<router-link to="/PaymentMethod">PaymentMethod</router-link> |
 			<router-link to="/Completed">Completed</router-link>
     </div>
-    <router-view/>
+		<keep-alive>
+      <router-view/>
+		</keep-alive>
   </div>
 </template>
 
