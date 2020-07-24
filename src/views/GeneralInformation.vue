@@ -26,13 +26,28 @@
 					<label for="birthDate">Birth Date <span>(optional)</span></label>
 						<div class="row">
 							<div class="col-4">
-								<input type="number" placeholder="YYYY" min="1900" max="2020">
+								<select name="" id="">
+									<option value="" hidden>YYYY</option>
+									<option v-for="year in yearRange" 
+													value=""
+													:key="year">{{ year }}</option>
+								</select>
 							</div>
 							<div class="col-4">
-								<input type="number" placeholder="MM" min="01" max="12">
+								<select name="" id="">
+									<option value="" hidden>MM</option>
+									<option v-for="month in 12" 
+													value=""
+													:key="month">{{ month }} 月</option>
+								</select>
 							</div>
 							<div class="col-4">
-								<input type="number" placeholder="DD" min="01" max="31">
+								<select name="" id="">
+									<option value="" hidden>DD</option>
+									<option v-for="day in 31" 
+													value=""
+													:key="day">{{ day }} 日</option>
+								</select>
 							</div>
 					</div>
 				</div>
@@ -45,7 +60,7 @@
 							<select name="city"
 											v-model="address.city"
 											@change="getRegionData">
-								<option value="" hidden>city</option>
+								<option value="" hidden>City</option>
 								<option v-for="city in apiAddress.city" 
 												:value="city"
 												:key="city">{{ city }}</option>
@@ -53,6 +68,9 @@
 						</div>
 						<div class="col-6">
 							<select name="dist">
+								<option value=""
+												v-if="!address.region" 
+												hidden>Dist</option>
 								<option v-for="region in address.region" 
 												:key="region"
 												:value="region">{{ region }}</option>
@@ -94,7 +112,7 @@ import service from '@/data/address'
 					region: '',
 					addressDetail: ''
 				},
-				year: null
+				yearRange: []
 			} 
 		},
 		methods: {
@@ -106,6 +124,16 @@ import service from '@/data/address'
 			getRegionData(){
 				const index = this.apiAddress.city.indexOf(this.address.city);
 				this.address.region = this.apiAddress.region[index];
+			},
+			getYearRange(){
+				const now = new Date();
+				const thisYear = now.getFullYear();
+				const totalPeriods = 100;
+				let period = thisYear - totalPeriods;
+				do{
+					this.yearRange.push(period);
+					period++;
+				}while(period !== thisYear+1)
 			}
 		},
 		computed: {
@@ -124,6 +152,9 @@ import service from '@/data/address'
 								this.isPhoneInputWarn &&
 								this.isAddressDetailInputWarn;
 			}
+		},
+		created(){
+			this.getYearRange();
 		}
 	}
 </script>
