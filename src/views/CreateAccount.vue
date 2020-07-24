@@ -66,18 +66,18 @@ export default {
 	methods: {
 		toNextPage(){
 			if(this.isButtonDisabled) {
-				this.$router.push({name: 'GeneralInfomation'});
+				this.$router.push({name: 'GeneralInformation'});
 			}
 		}
 	},
 	computed: {
 		isAccountInputWarn(){
-			const isAccountPass = /^[A-z0-9]+@[A-z]+\.com{1}$/;
-			return !this.account || isAccountPass.test(this.account);
+			const checkAccountPass = /^[A-z0-9]+@[A-z]+\.com{1}$/;
+			return !this.account || checkAccountPass.test(this.account);
 		},
 		isPasswordInputWarn(){
-			const isPasswordPass = /^[\d|A-z]{8}/;
-			return !this.password || isPasswordPass.test(this.password);
+			const checkPasswordPass = /^[\d|A-z]{8}/;
+			return !this.password || checkPasswordPass.test(this.password);
 		},
 		isComfirmPasswordInputWarn(){
 			return !this.comfirmPassword || (this.comfirmPassword === this.password);
