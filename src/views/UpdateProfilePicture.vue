@@ -5,7 +5,7 @@
 			<span>We wanna know you more!</span>
 		</div>	
 		<div class="upload">
-			<input class="upload-input-hidden" type="file">
+			<input class="upload-input-hidden" type="file" @change="fileSelected" multiple>
 			<div class="upload-input">
 				<span class="icon-wrapper">
 					<font-awesome-icon icon="images" />
@@ -16,47 +16,87 @@
 				</div>
 			</div>
 		</div>
-		<div class="warn-oversize">
+		<div v-if="false" class="warn-oversize">
 			<span>
 				<font-awesome-icon icon="exclamation-triangle" />
 			</span>		
 			<span>ONE FILE IS OVER THE MAXIMUM SIZE</span>
 		</div>
 		<section class="row images-uploaded">
-			<div class="col-4">
+			<div class="col-4" 
+						v-for="(image, index) in images" 
+						:key="image.src">
 				<div class="item">
-					<img src="https://image.flaticon.com/icons/svg/3089/3089380.svg" alt="">
-					<div class="delete-images">
-						<font-awesome-icon icon="trash-alt" />
-					</div>
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="item">
-					<img src="" alt="">
-					<div class="delete-images">
-						<font-awesome-icon icon="trash-alt" />
-					</div>
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="item">
-					<img src="" alt="">
-					<div class="delete-images">
+					<img :src="image.src">
+					<div @click="deleteImg"
+							:data-index="index" 
+							class="delete-images">
 						<font-awesome-icon icon="trash-alt" />
 					</div>
 				</div>
 			</div>
 		</section>
-		<button @click.prevent="toNextPage">SUBMIT & NEXT</button>	
+		<button @click.prevent="toNextPage"
+						:class="isButtonDisabled ? '' : 'disabled'">SUBMIT & NEXT</button>	
 	</form>
 </template>
 
 <script>
 	export default {
+		data(){
+			return {
+				images: [],
+				cacheImages: [],
+			}
+		},
 		methods: {
 			toNextPage(){
-				this.$router.push({name: 'PaymentMethod'});
+				if(this.isButtonDisabled) {
+					this.$router.push({name: 'PaymentMethod'});
+				}
+			},
+			fileSelected(event) {
+					const files = event.target.files; //取得 File物件
+					files.forEach.call(files,this.fileReader);
+			},
+			fileReader(file) {
+					// 限制檔案格式為 png
+					if (file.type !== 'image/png') {
+						alert ('檔案格式須為 png');
+						return false;
+					}
+					const reader = new FileReader(); //建立 FileReader 監聽 Load 事件
+					reader.readAsDataURL(file);
+					// reader.onload = function () {
+					// 	const img = new Image();
+					// 	img.src = reader.result;
+					// 	if (img.width > 150 || img.height>150) return false;
+					// }
+					
+					reader.addEventListener("load", this.createImage);
+
+			},
+			createImage(event) {
+					const file = event.target;
+					const image = {
+							title : file.name,
+							src : file.result,
+					};
+					this.cacheImages.push(image);
+
+					this.cacheImages.map(cacheImage => {
+						this.images.push(cacheImage);
+						this.cacheImages = [];
+					})
+			},
+			deleteImg(e){
+				const index = e.target.dataset.index;
+				this.images.splice(index, 1);
+			}
+		},
+		computed: {
+			isButtonDisabled(){
+				return (this.images.length > 0 && !this.isOversize);
 			}
 		}
 	}
@@ -83,6 +123,7 @@
 		top: 0;
 		left: 0;
 		opacity: 0;
+		cursor: pointer;
 	}
 }
 
@@ -117,7 +158,7 @@ p {
 	margin-bottom: 20px;
 	.item {
 		position: relative;
-		height: 100%;
+		height: 140px;
 		border-radius: 8px;
 		overflow: hidden;
 		border: 1px solid #000;
