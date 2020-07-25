@@ -76,7 +76,7 @@ export default {
 			return !this.account || checkAccountPass.test(this.account);
 		},
 		isPasswordInputWarn(){
-			const checkPasswordPass = /^[\d|A-z]{8}/;
+			const checkPasswordPass = /^[\d|A-z]{8,}$/;
 			return !this.password || checkPasswordPass.test(this.password);
 		},
 		isComfirmPasswordInputWarn(){
