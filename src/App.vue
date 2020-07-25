@@ -1,19 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/GeneralInformation">GeneralInformation</router-link> |
-			<router-link to="/UpdateProfilePicture">UpdateProfilePicture</router-link> |
-			<router-link to="/PaymentMethod">PaymentMethod</router-link> |
-			<router-link to="/Completed">Completed</router-link>
-    </div>
+		<header></header>
 		<keep-alive>
       <router-view/>
 		</keep-alive>
   </div>
 </template>
-
+	
 <style lang="scss">
+header {
+	height: 5px;
+	max-width: 460px;
+	margin: 0 auto 50px;
+	background-color: $blue-200;
+}
 
 #nav {
 	padding: 30px;
