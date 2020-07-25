@@ -42,10 +42,20 @@
 					<label for="expireDate">Expire Date</label>
 					<div class="row">
 						<div class="col-6">
-							<input type="number" placeholder="MM" min="01" max="12">
+							<select name="expireMonth">
+								<option value="" hidden>MM</option>
+								<option v-for="month in 12"
+												value=""
+												:key="month">{{ month }}</option>
+							</select>
 						</div>
 						<div class="col-6">
-							<input type="number" placeholder="DD" min="01" max="31">
+							<select name="expireDay">
+								<option value="" hidden>DD</option>
+								<option v-for="day in 31"
+												value=""
+												:key="day">{{ day }}</option>
+							</select>
 						</div>
 					</div>
 				</div>
@@ -78,13 +88,17 @@ import ToolTip from '@/components/toolTip'
 		computed: {
 			isCardNumInputWarn(){
 				const isCardNumPass = /^\d{16}$/;
-				return isCardNumPass.test(this.cardNumber);
+				return !this.cardNumber || isCardNumPass.test(this.cardNumber);
 			},
 			isBankNameInputWarn(){
-				return !!this.bankName;
+				const isBankName = /^[A-z]{2,}$/
+				return !this.bankName || isBankName.test(this.bankName);
 			},
 			isButtonDisabled(){
-				return this.isCardNumInputWarn && this.isBankNameInputWarn;
+				return this.cardNumber && 
+								this.bankName &&
+								this.isCardNumInputWarn && 
+								this.isBankNameInputWarn;
 			}
 		}
 	}
