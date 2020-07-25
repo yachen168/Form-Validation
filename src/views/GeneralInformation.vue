@@ -26,26 +26,26 @@
 					<label for="birthDate">Birth Date <span>(optional)</span></label>
 						<div class="row">
 							<div class="col-4">
-								<select name="" id="">
+								<select name="birthYear" v-model="birth.birthYear">
 									<option value="" hidden>YYYY</option>
 									<option v-for="year in yearRange" 
-													value=""
+													:value="year"
 													:key="year">{{ year }}</option>
 								</select>
 							</div>
 							<div class="col-4">
-								<select name="" id="">
+								<select name="birthMonth" v-model="birth.birthMonth">
 									<option value="" hidden>MM</option>
 									<option v-for="month in 12" 
-													value=""
+													:value="month"
 													:key="month">{{ month }} 月</option>
 								</select>
 							</div>
 							<div class="col-4">
-								<select name="" id="">
+								<select name="birthDay" v-model="birth.birthDay">
 									<option value="" hidden>DD</option>
 									<option v-for="day in 31" 
-													value=""
+													:value="day"
 													:key="day">{{ day }} 日</option>
 								</select>
 							</div>
@@ -106,13 +106,17 @@ import service from '@/data/address'
 		data(){
 			return {
 				apiAddress: service,
-				phoneNumber: null,
+				phoneNumber: '',
 				address: {
 					city: '',
 					region: '',
 					addressDetail: ''
 				},
-				yearRange: []
+				birth: {
+					birthYear: '',
+					birthMonth: '',
+					birthDay: ''
+				}
 			} 
 		},
 		methods: {
@@ -124,16 +128,6 @@ import service from '@/data/address'
 			getRegionData(){
 				const index = this.apiAddress.city.indexOf(this.address.city);
 				this.address.region = this.apiAddress.region[index];
-			},
-			getYearRange(){
-				const now = new Date();
-				const thisYear = now.getFullYear();
-				const totalPeriods = 100;
-				let period = thisYear - totalPeriods;
-				do{
-					this.yearRange.push(period);
-					period++;
-				}while(period !== thisYear+1)
 			}
 		},
 		computed: {
@@ -151,10 +145,19 @@ import service from '@/data/address'
 								this.address.addressDetail &&
 								this.isPhoneInputWarn &&
 								this.isAddressDetailInputWarn;
+			},
+			yearRange(){
+				let yearRange = [];
+				const now = new Date();
+				const thisYear = now.getFullYear();
+				const totalPeriods = 100;
+				let period = thisYear - totalPeriods;
+				do{
+					yearRange.push(period);
+					period++;
+				}while(period !== thisYear+1)
+					return yearRange;
 			}
-		},
-		created(){
-			this.getYearRange();
 		}
 	}
 </script>
