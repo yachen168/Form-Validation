@@ -46,6 +46,7 @@ button {
 
 button.disabled {
     background-color: $blue-100;
+    cursor: not-allowed;
 }
 
 input,
