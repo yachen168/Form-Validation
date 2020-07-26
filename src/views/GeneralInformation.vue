@@ -16,7 +16,8 @@
 						<input :class="isPhoneInputWarn ? '' : 'warn'" 
 										type="text" 
 										placeholder="0912 345 678"
-										v-model="phoneNumber">
+										:value="phoneNumber"
+										@input="formatPhoneNumber">
 						<Tooltip v-if="!isPhoneInputWarn">NUMBERS ONLY</Tooltip>
 					</div>
 				</div>
@@ -128,12 +129,15 @@ import service from '@/data/address'
 			getRegionData(){
 				const index = this.apiAddress.city.indexOf(this.address.city);
 				this.address.region = this.apiAddress.region[index];
+			},
+			formatPhoneNumber(e){
+				this.phoneNumber = e.target.value.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3');
 			}
 		},
 		computed: {
 			isPhoneInputWarn(){
 				const isPhoneNumPass = /^09[0-9]{8}$/;
-				return !this.phoneNumber || isPhoneNumPass.test(this.phoneNumber);
+				return !this.phoneNumber || isPhoneNumPass.test(this.phoneNumber.split(' ').join(''));
 			},
 			isAddressDetailInputWarn(){
 				// 至少一個中文字
