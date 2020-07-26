@@ -42,64 +42,68 @@
 </template>
 
 <script>
-	export default {
-		data(){
-			return {
-				images: [],
-				cacheImages: [],
+export default {
+	data(){
+		return {
+			images: [],
+			cacheImages: [],
+		}
+	},
+	methods: {
+		toNextPage(){
+			if(this.isButtonDisabled) {
+				this.$router.push({name: 'PaymentMethod'});
 			}
 		},
-		methods: {
-			toNextPage(){
-				if(this.isButtonDisabled) {
-					this.$router.push({name: 'PaymentMethod'});
+		fileSelected(event) {
+				const files = event.target.files; //取得 File物件
+				files.forEach.call(files,this.fileReader);
+		},
+		fileReader(file) {
+				// 限制檔案格式為 png
+				if (file.type !== 'image/png') {
+					alert ('檔案格式須為 png');
+					return false;
 				}
-			},
-			fileSelected(event) {
-					const files = event.target.files; //取得 File物件
-					files.forEach.call(files,this.fileReader);
-			},
-			fileReader(file) {
-					// 限制檔案格式為 png
-					if (file.type !== 'image/png') {
-						alert ('檔案格式須為 png');
-						return false;
-					}
-					const reader = new FileReader(); //建立 FileReader 監聽 Load 事件
-					reader.readAsDataURL(file);
-					// reader.onload = function () {
-					// 	const img = new Image();
-					// 	img.src = reader.result;
-					// 	if (img.width > 150 || img.height>150) return false;
-					// }
-					
-					reader.addEventListener("load", this.createImage);
+				const reader = new FileReader(); //建立 FileReader 監聽 Load 事件
+				reader.readAsDataURL(file);
+				// reader.onload = function () {
+				// 	const img = new Image();
+				// 	img.src = reader.result;
+				// 	if (img.width > 150 || img.height>150) return false;
+				// }
+				
+				reader.addEventListener("load", this.createImage);
 
-			},
-			createImage(event) {
-					const file = event.target;
-					const image = {
-							title : file.name,
-							src : file.result,
-					};
-					this.cacheImages.push(image);
-
-					this.cacheImages.map(cacheImage => {
-						this.images.push(cacheImage);
-						this.cacheImages = [];
-					})
-			},
-			deleteImg(e){
-				const index = e.target.dataset.index;
-				this.images.splice(index, 1);
-			}
 		},
-		computed: {
-			isButtonDisabled(){
-				return (this.images.length > 0 && !this.isOversize);
-			}
+		createImage(event) {
+				const file = event.target;
+				const image = {
+						title : file.name,
+						src : file.result,
+				};
+				this.cacheImages.push(image);
+
+				if (this.images.length + this.cacheImages.length <= 3){
+					this.cacheImages.map(cacheImage => {
+					this.images.push(cacheImage);
+					})
+				}else {
+					alert('最多上傳三張照片');
+				}
+				this.cacheImages = [];
+		},
+		deleteImg(e){
+			const index = e.target.dataset.index;
+			this.images.splice(index, 1);
+		}
+	},
+	computed: {
+		isButtonDisabled(){
+			return (this.images.length > 0 && !this.isOversize);
 		}
 	}
+}
 </script>
 
 <style lang="scss" scoped>
