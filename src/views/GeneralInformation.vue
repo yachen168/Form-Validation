@@ -142,6 +142,8 @@ import service from '@/data/address'
 			},
 			isButtonDisabled(){
 				return this.phoneNumber &&
+								this.address.city &&
+								this.address.region &&
 								this.address.addressDetail &&
 								this.isPhoneInputWarn &&
 								this.isAddressDetailInputWarn;
