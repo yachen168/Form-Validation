@@ -83,13 +83,10 @@ export default {
 						src : file.result,
 				};
 				this.cacheImages.push(image);
-
-				if (this.images.length + this.cacheImages.length <= 3){
-					this.cacheImages.map(cacheImage => {
-					this.images.push(cacheImage);
-					})
-				}else {
-					alert('最多上傳三張照片');
+				for (let item of this.cacheImages) {
+					if (this.images.length < 3){
+						this.images.push(item);
+					}
 				}
 				this.cacheImages = [];
 		},
