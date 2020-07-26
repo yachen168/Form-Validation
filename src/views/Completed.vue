@@ -13,11 +13,6 @@
 
 <script>
 	export default {
-		data(){
-			return {
-				setTimeoutId: null
-			}
-		},
 		created(){
 			this.setTimeoutId = setTimeout(()=>{
 					this.$router.push({name: 'Home'})
