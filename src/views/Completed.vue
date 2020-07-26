@@ -21,10 +21,8 @@
 		created(){
 			this.setTimeoutId = setTimeout(()=>{
 					this.$router.push({name: 'Home'})
+					clearTimeout(this.setTimeoutId);
 				},5000)
-		},
-		beforeDestroy() {
-			clearTimeout(this.setTimeoutId);
 		}
 	}
 </script>
