@@ -10,9 +10,9 @@
 					<div>
 						<label for="cardNumber">Card Number</label>
 						<input :class="isCardNumInputWarn ? '' : 'warn'"
-										type="number" 
 										placeholder="1234 5678 9012 3456"
-										v-model="cardNumber">
+										:value="cardNumber"
+										@input="formatCardNumber">
 						<ToolTip v-if="!isCardNumInputWarn">INVALID NUMBER</ToolTip>
 					</div>
 				</div>
@@ -83,11 +83,15 @@ import ToolTip from '@/components/Tooltip'
 				if(this.isButtonDisabled){
 						this.$router.push({name: 'Completed'});
 				}
+			},
+			formatCardNumber(e){
+				// 每 4 個數字空一格
+				this.cardNumber = e.target.value.replace(/(\d{4})(?=\d)/g, '$1 ');
 			}
 		},
 		computed: {
 			isCardNumInputWarn(){
-				const isCardNumPass = /^\d{16}$/;
+				const isCardNumPass = /^\d{4}\s\d{4}\s\d{4}\s\d{4}$/;
 				return !this.cardNumber || isCardNumPass.test(this.cardNumber);
 			},
 			isBankNameInputWarn(){
