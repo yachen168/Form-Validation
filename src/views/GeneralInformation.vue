@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import Tooltip from '@/components/toolTip'
+import Tooltip from '@/components/Tooltip'
 import service from '@/data/address'
 
 	export default {
@@ -152,11 +152,11 @@ import service from '@/data/address'
 				const thisYear = now.getFullYear();
 				const totalPeriods = 100;
 				let period = thisYear - totalPeriods;
-				do{
+				do {
 					yearRange.push(period);
 					period++;
-				}while(period !== thisYear+1)
-					return yearRange;
+				} while(period !== thisYear + 1)
+				return yearRange;
 			}
 		}
 	}

@@ -32,12 +32,12 @@
 			<div class="row">
 				<div class="col">
 					<div>
-						<label for="comfirmPassword">Comfirm Password</label>
+						<label for="confirmPassword">Confirm Password</label>
 						<input type="password" 
-						:class="isComfirmPasswordInputWarn ? '': 'warn'" 
+						:class="isConfirmPasswordInputWarn ? '': 'warn'" 
 						placeholder="●●●●●●"
-						v-model="comfirmPassword">
-						<Tooltip v-if="!isComfirmPasswordInputWarn">NOT MATCH</Tooltip>
+						v-model="confirmPassword">
+						<Tooltip v-if="!isConfirmPasswordInputWarn">NOT MATCH</Tooltip>
 					</div>
 				</div>
 			</div>
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import Tooltip from '@/components/toolTip'
+import Tooltip from '@/components/Tooltip'
 
 export default {
 	components: {
@@ -60,7 +60,7 @@ export default {
 		return {
 			account: null,
 			password: null,
-			comfirmPassword: null,
+			confirmPassword: null,
 		}
 	},
 	methods: {
@@ -79,16 +79,16 @@ export default {
 			const checkPasswordPass = /^[\d|A-z]{8,}$/;
 			return !this.password || checkPasswordPass.test(this.password);
 		},
-		isComfirmPasswordInputWarn(){
-			return !this.comfirmPassword || (this.comfirmPassword === this.password);
+		isConfirmPasswordInputWarn(){
+			return !this.confirmPassword || (this.confirmPassword === this.password);
 		},
 		isButtonDisabled(){
 			return this.account &&
 						this.password &&
-						this.comfirmPassword && 
+						this.confirmPassword && 
 						this.isAccountInputWarn && 
 						this.isPasswordInputWarn && 
-						this.isComfirmPasswordInputWarn;
+						this.isConfirmPasswordInputWarn;
 		},
 	}
 }

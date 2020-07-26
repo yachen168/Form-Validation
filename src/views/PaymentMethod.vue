@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import ToolTip from '@/components/toolTip'
+import ToolTip from '@/components/Tooltip'
 
 	export default {
 		components: {
