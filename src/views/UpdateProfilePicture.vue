@@ -16,18 +16,18 @@
 				</div>
 			</div>
 		</div>
-		<div v-if="false" class="warn-oversize">
+		<div v-if="isOversize && images.length > 0" class="warn-oversize">
 			<span>
 				<font-awesome-icon icon="exclamation-triangle" />
 			</span>		
-			<span>ONE FILE IS OVER THE MAXIMUM SIZE</span>
+			<span>圖片尺寸超過 150*150</span>
 		</div>
 		<section class="row images-uploaded">
 			<div class="col-4" 
 						v-for="(image, index) in images" 
 						:key="image.src">
 				<div class="item">
-					<img :src="image.src">
+					<img :src="image.src" ref="elememt">
 					<div @click="deleteImg"
 							:data-index="index" 
 							class="delete-images">
@@ -37,7 +37,7 @@
 			</div>
 		</section>
 		<button @click.prevent="toNextPage"
-						:class="isButtonDisabled ? '' : 'disabled'">SUBMIT & NEXT</button>	
+						:class="{'disabled': isButtonDisabled}">SUBMIT & NEXT</button>	
 	</form>
 </template>
 
@@ -47,11 +47,12 @@ export default {
 		return {
 			images: [],
 			cacheImages: [],
+			isOversize: false
 		}
 	},
 	methods: {
 		toNextPage(){
-			if(this.isButtonDisabled) {
+			if(!this.isButtonDisabled) {
 				this.$router.push({name: 'PaymentMethod'});
 			}
 		},
@@ -60,21 +61,24 @@ export default {
 				files.forEach.call(files,this.fileReader);
 		},
 		fileReader(file) {
-				// 限制檔案格式為 png
-				if (file.type !== 'image/png') {
+				const isPNG = file.type === 'image/png';
+				if (!isPNG) {
 					alert ('檔案格式須為 png');
-					return false;
+					return;
 				}
 				const reader = new FileReader(); //建立 FileReader 監聽 Load 事件
 				reader.readAsDataURL(file);
-				// reader.onload = function () {
-				// 	const img = new Image();
-				// 	img.src = reader.result;
-				// 	if (img.width > 150 || img.height>150) return false;
-				// }
 				
+				reader.onload = () => {
+					const img = new Image();
+					img.src = reader.result;
+					img.onload = () => {
+						if (img.width > 150 || img.height > 150) {
+							this.isOversize = true;
+						}
+					}
+				}
 				reader.addEventListener("load", this.createImage);
-
 		},
 		createImage(event) {
 				const file = event.target;
@@ -93,11 +97,18 @@ export default {
 		deleteImg(e){
 			const index = e.target.dataset.index;
 			this.images.splice(index, 1);
+			this.checkAllImageSize();
+		},
+		checkAllImageSize(){
+			this.$nextTick(function(){
+			const [...images] = document.querySelectorAll('.item img');
+			this.isOversize = !images.every(image => (image.width <=150 && image.height <= 150));
+			})
 		}
 	},
 	computed: {
 		isButtonDisabled(){
-			return (this.images.length > 0 && !this.isOversize);
+			return !(this.images.length > 0 && !this.isOversize);
 		}
 	}
 }
@@ -159,12 +170,13 @@ p {
 	margin-bottom: 20px;
 	.item {
 		position: relative;
+		width: 140px;
 		height: 140px;
 		border-radius: 8px;
 		overflow: hidden;
 		border: 1px solid #000;
 		img {
-			width: 100%;
+			// width: 100%;
 			vertical-align: top;
 		}
 	}
