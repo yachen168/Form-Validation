@@ -1,21 +1,21 @@
 <template>
 	<ul>
-		<li :class="{'isDarkBlue': progress.firstStep === 'editing'||'done'}">
+		<li :class="{'isDarkBlue': progress.firstStep === 'editing'|| progress.firstStep === 'done'}">
 			<font-awesome-icon v-if="progress.firstStep === 'done'" icon="check-circle" />
 			<font-awesome-icon v-else-if="progress.firstStep === 'editing'" :icon="['far','dot-circle']" />	
 			<font-awesome-icon v-else :icon="['far','circle']" />	
 		</li>
-		<li :class="{'isDarkBlue': progress.secondStep === 'editing'||'done'}">
+		<li :class="{'isDarkBlue': progress.secondStep === 'editing'|| progress.secondStep === 'done'}">
 			<font-awesome-icon v-if="progress.secondStep === 'done'" icon="check-circle" />
 			<font-awesome-icon v-else-if="progress.secondStep === 'editing'" :icon="['far','dot-circle']" />	
 			<font-awesome-icon v-else :icon="['far','circle']" />	
 		</li>
-		<li :class="{'isDarkBlue': progress.thirdStep === 'editing'||'done'}">
+		<li :class="{'isDarkBlue': progress.thirdStep === 'editing'|| progress.thirdStep === 'done'}">
 			<font-awesome-icon v-if="progress.thirdStep === 'done'" icon="check-circle" />
 			<font-awesome-icon v-else-if="progress.thirdStep === 'editing'" :icon="['far','dot-circle']" />	
 			<font-awesome-icon v-else :icon="['far','circle']" />	
 		</li>
-		<li :class="{'isDarkBlue': progress.lastStep === 'editing'||'done'}">
+		<li :class="{'isDarkBlue': progress.lastStep === 'editing'|| progress.lastStep === 'done'}">
 			<font-awesome-icon v-if="progress.lastStep === 'done'" icon="check-circle" />
 			<font-awesome-icon v-else-if="progress.lastStep === 'editing'" :icon="['far','dot-circle']" />	
 			<font-awesome-icon v-else :icon="['far','circle']" />	
