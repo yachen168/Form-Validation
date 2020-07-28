@@ -1,5 +1,10 @@
 # 表單驗證與上傳圖片預覽
+## 使用技術
+- Vue Router
+- Vuex
+
 ## 實現功能
+- 進度條提示
 - 資料格式不符警示
 - 自動格式化手機號碼、信用卡號
 - 上傳圖片預覽
@@ -14,7 +19,7 @@
 
 [demo](https://yachen168.github.io/Form-Validation/#/)
 
-![](./src/assets/images/demo.gif)
+![](./demo.gif)
 
 
 [設計稿](https://hexschool.github.io/THE_F2E_Design/week6-validation/#artboard6)
