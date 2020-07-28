@@ -54,7 +54,7 @@ li {
 li:not(:first-child)::before {
 	content: '';
 	position: absolute;
-	width: 55px;
+	width: 56px;
 	height: 2px;
 	background-color: $blue-100;
 	right: 100%;
