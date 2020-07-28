@@ -68,6 +68,9 @@
 <script>
 import ToolTip from '@/components/Tooltip'
 
+// regExp
+import Validation from '@/Validation/Validation'
+
 	export default {
 		components: {
 			ToolTip
@@ -91,12 +94,12 @@ import ToolTip from '@/components/Tooltip'
 		},
 		computed: {
 			isCardNumInputWarn(){
-				const isCardNumPass = /^\d{4}\s\d{4}\s\d{4}\s\d{4}$/;
-				return !this.cardNumber || isCardNumPass.test(this.cardNumber);
+				const checkCardNumber = Validation.paymentMethod.checkCardNumber;
+				return !this.cardNumber || checkCardNumber.test(this.cardNumber);
 			},
 			isBankNameInputWarn(){
-				const isBankName = /^[A-z]{2,}$/
-				return !this.bankName || isBankName.test(this.bankName);
+				const checkBankName = Validation.paymentMethod.checkBankName;
+				return !this.bankName || checkBankName.test(this.bankName);
 			},
 			isButtonDisabled(){
 				return this.cardNumber && 

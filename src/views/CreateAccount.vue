@@ -1,5 +1,6 @@
 <template>
   <div>
+		<ProgressBar></ProgressBar>
 		<div class="title">
 			<h1>Create Account</h1>
 			<span>Glad to see you here!</span>
@@ -51,10 +52,14 @@
 
 <script>
 import Tooltip from '@/components/Tooltip'
+import ProgressBar from '@/components/ProgressBar'
+
+// RegExp
+import Validation from '@/Validation/Validation'
 
 export default {
 	components: {
-		Tooltip
+		Tooltip,ProgressBar
 	},
 	data(){
 		return {
@@ -72,12 +77,12 @@ export default {
 	},
 	computed: {
 		isAccountInputWarn(){
-			const checkAccountPass = /^[A-z0-9]+@[A-z]+\.com{1}$/;
-			return !this.account || checkAccountPass.test(this.account);
+			const checkAccount = Validation.creatAccount.checkAccount;
+			return !this.account || checkAccount.test(this.account);
 		},
 		isPasswordInputWarn(){
-			const checkPasswordPass = /^[\d|A-z]{8,}$/;
-			return !this.password || checkPasswordPass.test(this.password);
+			const checkPassword = Validation.creatAccount.checkPassword;
+			return !this.password || checkPassword.test(this.password);
 		},
 		isConfirmPasswordInputWarn(){
 			return !this.confirmPassword || (this.confirmPassword === this.password);

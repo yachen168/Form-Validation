@@ -100,6 +100,9 @@
 import Tooltip from '@/components/Tooltip'
 import service from '@/data/address'
 
+// regExp
+import Validation from '@/Validation/Validation'
+
 	export default {
 		components: {
 			Tooltip
@@ -136,13 +139,12 @@ import service from '@/data/address'
 		},
 		computed: {
 			isPhoneInputWarn(){
-				const isPhoneNumPass = /^09[0-9]{8}$/;
-				return !this.phoneNumber || isPhoneNumPass.test(this.phoneNumber.split(' ').join(''));
+				const checkPhoneNumber = Validation.generalInformation.checkPhoneNumber;
+				return !this.phoneNumber || checkPhoneNumber.test(this.phoneNumber.split(' ').join(''));
 			},
 			isAddressDetailInputWarn(){
-				// 至少一個中文字
-				const checkAdress = /[\u4e00-\u9fa5]/;
-				return !this.address.addressDetail || checkAdress.test(this.address.addressDetail);
+				const checkAddress = Validation.generalInformation.checkAddress;
+				return !this.address.addressDetail || checkAddress.test(this.address.addressDetail);
 			},
 			isButtonDisabled(){
 				return this.phoneNumber &&
