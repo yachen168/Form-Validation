@@ -29,8 +29,7 @@
 						:key="image.src">
 				<div class="item">
 					<img :src="image.src" ref="elememt">
-					<div @click="deleteImg"
-							:data-index="index" 
+					<div @click="deleteImg(index)" 
 							class="delete-images">
 						<font-awesome-icon icon="trash-alt" />
 					</div>
@@ -102,8 +101,7 @@ export default {
 				}
 				this.cacheImages = [];
 		},
-		deleteImg(e){
-			const index = e.target.dataset.index;
+		deleteImg(index){
 			this.images.splice(index, 1);
 			this.checkAllImageSize();
 		},
