@@ -1,5 +1,6 @@
 <template>
 	<form>
+		<ProgressBar :progress="progress"></ProgressBar>
 		<div class="title">
 			<h1>Update Profile Picture</h1>
 			<span>We wanna know you more!</span>
@@ -42,18 +43,25 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import ProgressBar from '@/components/ProgressBar'
+
 export default {
+	components:{
+		ProgressBar
+	},
 	data(){
 		return {
 			images: [],
 			cacheImages: [],
-			isOversize: false
+			isOversize: false,
 		}
 	},
 	methods: {
 		toNextPage(){
 			if(!this.isButtonDisabled) {
 				this.$router.push({name: 'PaymentMethod'});
+				this.$store.commit('changeStep',['thirdStep','lastStep']);
 			}
 		},
 		fileSelected(event) {
@@ -68,7 +76,7 @@ export default {
 				}
 				const reader = new FileReader(); //建立 FileReader 監聽 Load 事件
 				reader.readAsDataURL(file);
-				
+
 				reader.onload = () => {
 					const img = new Image();
 					img.src = reader.result;
@@ -107,6 +115,7 @@ export default {
 		}
 	},
 	computed: {
+		...mapState(['progress']),
 		isButtonDisabled(){
 			return !(this.images.length > 0 && !this.isOversize);
 		}
@@ -171,12 +180,11 @@ p {
 	.item {
 		position: relative;
 		width: 140px;
-		height: 140px;
+		height: 150px;
 		border-radius: 8px;
 		overflow: hidden;
 		border: 1px solid #000;
 		img {
-			// width: 100%;
 			vertical-align: top;
 		}
 	}

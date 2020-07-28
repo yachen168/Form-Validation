@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<ProgressBar :progress="progress"></ProgressBar>
 		<div class="title">
 			<h1>Payment Method</h1>
 			<span>Add your credit card information!</span>
@@ -66,25 +67,29 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import ToolTip from '@/components/Tooltip'
+import ProgressBar from '@/components/ProgressBar'
 
 // regExp
 import Validation from '@/Validation/Validation'
 
 	export default {
 		components: {
-			ToolTip
+			ToolTip, ProgressBar
 		},
 		data(){
 			return {
 				cardNumber: null,
-				bankName: null
+				bankName: null,
 			}
 		},
 		methods: {
 			toNextPage(){
 				if(this.isButtonDisabled){
 						this.$router.push({name: 'Completed'});
+						this.$store.commit('changeStep',['lastStep','']);
 				}
 			},
 			formatCardNumber(e){
@@ -93,6 +98,7 @@ import Validation from '@/Validation/Validation'
 			}
 		},
 		computed: {
+			...mapState(['progress']),
 			isCardNumInputWarn(){
 				const checkCardNumber = Validation.paymentMethod.checkCardNumber;
 				return !this.cardNumber || checkCardNumber.test(this.cardNumber);

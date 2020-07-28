@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<ProgressBar :progress="progress"></ProgressBar>
 		<div class="title">
 			<h1>General Information</h1>
 			<span>Tell us who you are!</span>
@@ -97,15 +98,18 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import Tooltip from '@/components/Tooltip'
 import service from '@/data/address'
+import ProgressBar from '@/components/ProgressBar'
 
 // regExp
 import Validation from '@/Validation/Validation'
 
 	export default {
 		components: {
-			Tooltip
+			Tooltip, ProgressBar
 		},
 		data(){
 			return {
@@ -120,13 +124,14 @@ import Validation from '@/Validation/Validation'
 					birthYear: '',
 					birthMonth: '',
 					birthDay: ''
-				}
+				},
 			} 
 		},
 		methods: {
 			toNextPage(){
 				if (this.isButtonDisabled){
 					this.$router.push({name: 'UpdateProfilePicture'});
+					this.$store.commit('changeStep',['secondStep','thirdStep']);
 				}
 			},
 			getRegionData(){
@@ -138,6 +143,7 @@ import Validation from '@/Validation/Validation'
 			}
 		},
 		computed: {
+			...mapState(['progress']),
 			isPhoneInputWarn(){
 				const checkPhoneNumber = Validation.generalInformation.checkPhoneNumber;
 				return !this.phoneNumber || checkPhoneNumber.test(this.phoneNumber.split(' ').join(''));

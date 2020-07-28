@@ -1,6 +1,6 @@
 <template>
   <div>
-		<ProgressBar></ProgressBar>
+		<ProgressBar :progress="progress"></ProgressBar>
 		<div class="title">
 			<h1>Create Account</h1>
 			<span>Glad to see you here!</span>
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Tooltip from '@/components/Tooltip'
 import ProgressBar from '@/components/ProgressBar'
 
@@ -59,7 +60,7 @@ import Validation from '@/Validation/Validation'
 
 export default {
 	components: {
-		Tooltip,ProgressBar
+		Tooltip, ProgressBar
 	},
 	data(){
 		return {
@@ -72,10 +73,12 @@ export default {
 		toNextPage(){
 			if(this.isButtonDisabled) {
 				this.$router.push({name: 'GeneralInformation'});
+				this.$store.commit('changeStep',['firstStep','secondStep']);
 			}
 		}
 	},
 	computed: {
+		...mapState(['progress']),
 		isAccountInputWarn(){
 			const checkAccount = Validation.creatAccount.checkAccount;
 			return !this.account || checkAccount.test(this.account);
