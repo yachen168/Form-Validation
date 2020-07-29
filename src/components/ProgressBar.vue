@@ -1,7 +1,7 @@
 <template>
 	<ul>
-		<li v-for="step in progress"
-				:key="step"
+		<li v-for="(step,key) in progress"
+				:key="key"
 				:class="{'isDarkBlue': step}">
 			<font-awesome-icon v-if="step === 'done'" icon="check-circle" />
 			<font-awesome-icon v-else-if="step === 'editing'" :icon="['far','dot-circle']" />	

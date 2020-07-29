@@ -89,7 +89,7 @@ import Validation from '@/Validation/Validation'
 			toNextPage(){
 				if(this.isButtonDisabled){
 						this.$router.push({name: 'Completed'});
-						this.$store.commit('changeStep',['lastStep','']);
+						this.$store.commit('changeStep',['lastStep']);
 				}
 			},
 			formatCardNumber(e){
