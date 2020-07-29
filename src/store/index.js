@@ -16,7 +16,9 @@ export default new Vuex.Store({
     mutations: {
         changeStep(state, [currentPage, nextPage]) {
             state.progress[currentPage] = 'done';
-            state.progress[nextPage] = 'editing';
+            if (nextPage) {
+                state.progress[nextPage] = 'editing';
+            }
         }
     },
     actions: {}

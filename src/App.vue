@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-		<Header></Header>
-		<keep-alive>
+    <Header></Header>
+    <keep-alive>
       <router-view/>
-		</keep-alive>
+    </keep-alive>
   </div>
 </template>
 
@@ -11,12 +11,12 @@
 import Header from '@/components/Header'
 
 export default {
-	components:{
-		Header
-	}
+  components:{
+    Header
+  }
 }
 </script>
-	
+  
 <style lang="scss">
 // #app
 
