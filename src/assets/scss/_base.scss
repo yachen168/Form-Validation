@@ -60,6 +60,14 @@ select {
     outline: none;
 }
 
+select {
+    color: $gray;
+}
+
+select.selected {
+    color: $black;
+}
+
 input.warn {
     border: 2px solid $orange;
 }

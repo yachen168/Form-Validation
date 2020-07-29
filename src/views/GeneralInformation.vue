@@ -28,7 +28,7 @@
 					<label for="birthDate">Birth Date <span>(optional)</span></label>
 						<div class="row">
 							<div class="col-4">
-								<select name="birthYear" v-model="birth.birthYear">
+								<select @change="changeColor" name="birthYear" v-model="birth.birthYear">
 									<option value="" hidden>YYYY</option>
 									<option v-for="year in yearRange" 
 													:value="year"
@@ -36,7 +36,7 @@
 								</select>
 							</div>
 							<div class="col-4">
-								<select name="birthMonth" v-model="birth.birthMonth">
+								<select @change="changeColor" name="birthMonth" v-model="birth.birthMonth">
 									<option value="" hidden>MM</option>
 									<option v-for="month in 12" 
 													:value="month"
@@ -44,7 +44,7 @@
 								</select>
 							</div>
 							<div class="col-4">
-								<select name="birthDay" v-model="birth.birthDay">
+								<select @change="changeColor" name="birthDay" v-model="birth.birthDay">
 									<option value="" hidden>DD</option>
 									<option v-for="day in 31" 
 													:value="day"
@@ -61,7 +61,7 @@
 						<div class="col-6">
 							<select name="city"
 											v-model="address.city"
-											@change="getRegionData">
+											@change="getRegionData();changeColor($event)">
 								<option value="" hidden>City</option>
 								<option v-for="city in apiAddress.city" 
 												:value="city"
@@ -69,9 +69,8 @@
 							</select>
 						</div>
 						<div class="col-6">
-							<select name="dist">
-								<option value=""
-												v-if="!address.region" 
+							<select @change="changeColor" name="dist">
+								<option value="Dist" 
 												hidden>Dist</option>
 								<option v-for="region in address.region" 
 												:key="region"
@@ -140,6 +139,9 @@ import Validation from '@/Validation/Validation'
 			},
 			formatPhoneNumber(e){
 				this.phoneNumber = e.target.value.replace(/(\d{4})(\d{3})(\d{3})/, '$1 $2 $3');
+			},
+			changeColor(e){
+				e.target.classList.add('selected');
 			}
 		},
 		computed: {

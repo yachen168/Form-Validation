@@ -43,7 +43,7 @@
 					<label for="expireDate">Expire Date</label>
 					<div class="row">
 						<div class="col-6">
-							<select name="expireMonth">
+							<select @change="changeColor" name="expireMonth">
 								<option value="" hidden>MM</option>
 								<option v-for="month in 12"
 												value=""
@@ -51,7 +51,7 @@
 							</select>
 						</div>
 						<div class="col-6">
-							<select name="expireDay">
+							<select @change="changeColor" name="expireDay">
 								<option value="" hidden>DD</option>
 								<option v-for="day in 31"
 												value=""
@@ -95,6 +95,9 @@ import Validation from '@/Validation/Validation'
 			formatCardNumber(e){
 				// 每 4 個數字空一格
 				this.cardNumber = e.target.value.replace(/(\d{4})(?=\d)/g, '$1 ');
+			},
+			changeColor(e){
+				e.target.classList.add('selected');
 			}
 		},
 		computed: {
