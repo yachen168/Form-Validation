@@ -11,9 +11,9 @@
             <label for="account">Account</label>
             <input
               type="email"
-              :class="isAccountInputWarn ? '' : 'warn'"
-              v-model="account"
               placeholder="example@email.com"
+              v-model="account"
+              :class="{ warn: !isAccountInputWarn}"
             />
             <Tooltip v-if="!isAccountInputWarn">INVALID EMAIL</Tooltip>
           </div>
@@ -25,9 +25,9 @@
             <label for="password">Password</label>
             <input
               type="password"
-              :class="isPasswordInputWarn ? '' : 'warn'"
               placeholder="●●●●●●"
               v-model="password"
+              :class="{ warn: !isPasswordInputWarn }"
             />
             <Tooltip v-if="!isPasswordInputWarn">MINIMUN 8 CHARACTERS</Tooltip>
           </div>
@@ -39,17 +39,17 @@
             <label for="confirmPassword">Confirm Password</label>
             <input
               type="password"
-              :class="isConfirmPasswordInputWarn ? '': 'warn'"
               placeholder="●●●●●●"
               v-model="confirmPassword"
+              :class="{ warn: !isConfirmPasswordInputWarn }"
             />
             <Tooltip v-if="!isConfirmPasswordInputWarn">NOT MATCH</Tooltip>
           </div>
         </div>
       </div>
       <button
-        :class="isButtonDisabled ? '' : 'disabled' "
         type="submit"
+        :class="{ disabled: !isButtonDisabled }"
         @click.prevent="toNextPage"
       >SUBMIT & NEXT</button>
     </form>
@@ -58,9 +58,7 @@
 
 <script>
 import Tooltip from "@/components/Tooltip";
-
-// RegExp
-import Validation from "@/Validation/Validation";
+import Validation from "@/Validation/Validation";   // RegExp
 
 export default {
   components: {

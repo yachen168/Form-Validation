@@ -10,11 +10,11 @@
           <div>
             <label for="cardNumber">Card Number</label>
             <input
-              :class="isCardNumInputWarn ? '' : 'warn'"
+              id="cardNumber"
               placeholder="1234 5678 9012 3456"
+              :class="{ warn: !isCardNumInputWarn }"
               :value="cardNumber"
               @input="formatCardNumber"
-              id="cardNumber"
             />
             <ToolTip v-if="!isCardNumInputWarn">INVALID NUMBER</ToolTip>
           </div>
@@ -29,11 +29,11 @@
           <div>
             <label for="bankName">Bank Name</label>
             <input
-              :class="isBankNameInputWarn ? '' : 'warn'"
+              id="bankName"
               type="email"
               placeholder="EXAMPLE BANK"
               v-model="bankName"
-              id="bankName"
+              :class="{ warn: !isBankNameInputWarn }"
             />
             <ToolTip v-if="!isBankNameInputWarn">REQUIRED FILED</ToolTip>
           </div>
@@ -64,7 +64,7 @@
           </div>
         </div>
       </div>
-      <button :class="isButtonDisabled ? '' : 'disabled'" @click="toNextPage">
+      <button :class="{ disabled: !isButtonDisabled }" @click="toNextPage">
         Done
       </button>
     </form>
@@ -73,9 +73,7 @@
 
 <script>
 import ToolTip from "@/components/Tooltip";
-
-// regExp
-import Validation from "@/Validation/Validation";
+import Validation from "@/Validation/Validation";   // RegExp
 
 export default {
   components: {
