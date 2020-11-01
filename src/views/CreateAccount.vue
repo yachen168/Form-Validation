@@ -76,11 +76,11 @@ export default {
   methods: {
     toNextPage() {
       if (this.isButtonDisabled) {
-        this.$router.push({ name: "GeneralInformation" });
         this.$store.commit("changeStep", { 
           currentPage:"firstStep", 
           nextPage:"secondStep" 
           });
+        this.$router.push({ name: "GeneralInformation" });
       }
     },
   },

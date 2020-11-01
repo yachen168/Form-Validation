@@ -126,11 +126,11 @@ import Validation from '@/Validation/Validation'
     methods: {
       toNextPage(){
         if (this.isButtonDisabled){
-          this.$router.push({name: 'UpdateProfilePicture'});
           this.$store.commit('changeStep',{
             currentPage: 'secondStep',
             nextPage: 'thirdStep'
           });
+          this.$router.push({name: 'UpdateProfilePicture'});
         }
       },
       getRegionData(){

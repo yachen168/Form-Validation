@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "../store";
 import FormEntry from "../views/FormEntry.vue";
 import CreateAccount from "../views/CreateAccount.vue";
 import GeneralInformation from "../views/GeneralInformation.vue";
@@ -27,21 +28,49 @@ const routes = [
         path: "general-information",
         name: "GeneralInformation",
         component: GeneralInformation,
+        beforeEnter: (to, from, next) => {
+          if (store.getters.progress.firstStep === "done") {
+            next();
+          } else {
+            next({ name: "CreateAccount" });
+          }
+        },
       },
       {
         path: "update-profile-picture",
         name: "UpdateProfilePicture",
         component: UpdateProfilePicture,
+        beforeEnter: (to, from, next) => {
+          if (store.getters.progress.secondStep === "done") {
+            next();
+          } else {
+            next({ name: "GeneralInformation" });
+          }
+        },
       },
       {
         path: "payment-method",
         name: "PaymentMethod",
         component: PaymentMethod,
+        beforeEnter: (to, from, next) => {
+          if (store.getters.progress.thirdStep === "done") {
+            next();
+          } else {
+            next({ name: "UpdateProfilePicture" });
+          }
+        },
       },
       {
         path: "/Completed",
         name: "Completed",
         component: Completed,
+        beforeEnter: (to, from, next) => {
+          if (store.getters.progress.lastStep === "done") {
+            next();
+          } else {
+            next({ name: "PaymentMethod" });
+          }
+        },
       },
     ],
   },

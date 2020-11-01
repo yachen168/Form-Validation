@@ -3,9 +3,14 @@
     <div class="title">
       <h1>Update Profile Picture</h1>
       <span>We wanna know you more!</span>
-    </div>  
+    </div>
     <div class="upload">
-      <input class="upload-input-hidden" type="file" @change="fileSelected" multiple>
+      <input
+        class="upload-input-hidden"
+        type="file"
+        @change="fileSelected"
+        multiple
+      />
       <div class="upload-input">
         <span class="icon-wrapper">
           <font-awesome-icon icon="images" />
@@ -19,105 +24,102 @@
     <div v-if="isOversize && images.length > 0" class="warn-oversize">
       <span>
         <font-awesome-icon icon="exclamation-triangle" />
-      </span>    
+      </span>
       <span>圖片尺寸超過 150*150</span>
     </div>
     <section class="row images-uploaded">
-      <div class="col-4" 
-            v-for="(image, index) in images" 
-            :key="image.src">
+      <div class="col-4" v-for="(image, index) in images" :key="image.src">
         <div class="item">
-          <img :src="image.src" ref="elememt">
-          <div @click="deleteImg(index)" 
-              class="delete-images">
+          <img :src="image.src" ref="elememt" />
+          <div @click="deleteImg(index)" class="delete-images">
             <font-awesome-icon icon="trash-alt" />
           </div>
         </div>
       </div>
     </section>
-    <button @click.prevent="toNextPage"
-            :class="{'disabled': isButtonDisabled}">SUBMIT & NEXT</button>  
+    <button @click.prevent="toNextPage" :class="{ disabled: isButtonDisabled }">
+      SUBMIT & NEXT
+    </button>
   </form>
 </template>
 
 <script>
-
 export default {
-  data(){
+  data() {
     return {
       images: [],
       cacheImages: [],
       isOversize: false,
-    }
+    };
   },
   methods: {
-    toNextPage(){
-      if(!this.isButtonDisabled) {
-        this.$router.push({name: 'PaymentMethod'});
-        this.$store.commit('changeStep',{ 
-          currentPage: 'thirdStep',
-          nextPage: 'lastStep'
+    toNextPage() {
+      if (!this.isButtonDisabled) {
+        this.$store.commit("changeStep", {
+          currentPage: "thirdStep",
+          nextPage: "lastStep",
         });
+        this.$router.push({ name: "PaymentMethod" });
       }
     },
     fileSelected(event) {
-        const files = event.target.files; //取得 File物件]
-        console.log(files);
-        files.forEach.call(files,this.fileReader);
-        console.log(files);
+      const files = event.target.files; // 取得 File物件]
+      files.forEach.call(files, this.fileReader);
     },
     fileReader(file) {
-        const isPNG = file.type === 'image/png';
-        if (!isPNG) {
-          alert ('檔案格式須為 png');
-          return;
-        }
-        const reader = new FileReader(); //建立 FileReader 監聽 Load 事件
-        reader.readAsDataURL(file);
+      const isPNG = file.type === "image/png";
+      if (!isPNG) {
+        alert("檔案格式須為 png");
+        return;
+      }
+      const reader = new FileReader(); // 建立 FileReader 監聽 Load 事件
+      reader.readAsDataURL(file);
 
-        reader.onload = () => {
-          const img = new Image();
-          const [maxWidth, maxHeight] = [150,150];
-          img.src = reader.result;
-          img.onload = () => {
-            if (img.width > maxWidth || img.height > maxHeight) {
-              this.isOversize = true;
-            }
+      reader.onload = () => {
+        const img = new Image();
+        const [maxWidth, maxHeight] = [150, 150];
+        img.src = reader.result;
+        img.onload = () => {
+          if (img.width > maxWidth || img.height > maxHeight) {
+            this.isOversize = true;
           }
-        }
-        reader.addEventListener("load", this.createImage);
+        };
+      };
+      reader.addEventListener("load", this.createImage);
     },
     createImage(event) {
-        const file = event.target;
-        const image = {
-            title : file.name,
-            src : file.result,
-        };
-        this.cacheImages.push(image);
-        for (let item of this.cacheImages) {
-          if (this.images.length < 3){
-            this.images.push(item);
-          }
+      const file = event.target;
+      const image = {
+        title: file.name,
+        src: file.result,
+      };
+      this.cacheImages.push(image);
+      for (let item of this.cacheImages) {
+        if (this.images.length < 3) {
+          this.images.push(item);
         }
-        this.cacheImages = [];
+      }
+      this.cacheImages = [];
     },
-    deleteImg(index){
+    deleteImg(index) {
       this.images.splice(index, 1);
       this.checkAllImageSize();
     },
-    checkAllImageSize(){
-      this.$nextTick(function(){
-      const [...images] = document.querySelectorAll('.item img');
-      this.isOversize = !images.every(image => (image.width <=150 && image.height <= 150));
-      })
-    }
+    checkAllImageSize() {
+      this.$nextTick(function() {
+        const [...images] = document.querySelectorAll(".item img");
+        this.isOversize = !images.every(
+          (image) => image.width <= 150 && image.height <= 150
+        );
+      });
+    },
   },
   computed: {
-    isButtonDisabled(){
+    isButtonDisabled() {
       return !(this.images.length > 0 && !this.isOversize);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -128,7 +130,7 @@ export default {
   padding: 35px 0;
   border: 2px solid #000;
   border-radius: 8px;
-  color: #9B9B9B;
+  color: #9b9b9b;
   &-input {
     display: flex;
     justify-content: center;
@@ -164,7 +166,7 @@ p {
   text-align: center;
   letter-spacing: 1px;
   color: #fff;
-  background-color:  #F5A623;
+  background-color: #f5a623;
   border-radius: 8px;
   span:first-child {
     margin-right: 10px;
@@ -193,7 +195,7 @@ p {
     width: 100%;
     height: 50px;
     bottom: 0;
-    background-color:  #0275D8;
+    background-color: #0275d8;
     font-size: 20px;
     color: #fff;
     opacity: 0;
