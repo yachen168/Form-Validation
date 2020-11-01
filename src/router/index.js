@@ -15,7 +15,7 @@ const routes = [
   {
     path: "/",
     name: "FormEntry",
-    redirect: '/create-account',
+    redirect: "/create-account",
     component: FormEntry,
     children: [
       {
