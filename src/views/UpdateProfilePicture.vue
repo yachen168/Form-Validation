@@ -1,6 +1,6 @@
 <template>
   <form>
-    <ProgressBar :progress="progress"></ProgressBar>
+    <ProgressBar :progress="$store.getters.progress"></ProgressBar>
     <div class="title">
       <h1>Update Profile Picture</h1>
       <span>We wanna know you more!</span>
@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import ProgressBar from '@/components/ProgressBar'
 
 export default {
@@ -60,12 +59,17 @@ export default {
     toNextPage(){
       if(!this.isButtonDisabled) {
         this.$router.push({name: 'PaymentMethod'});
-        this.$store.commit('changeStep',['thirdStep','lastStep']);
+        this.$store.commit('changeStep',{ 
+          currentPage: 'thirdStep',
+          nextPage: 'lastStep'
+        });
       }
     },
     fileSelected(event) {
-        const files = event.target.files; //取得 File物件
+        const files = event.target.files; //取得 File物件]
+        console.log(files);
         files.forEach.call(files,this.fileReader);
+        console.log(files);
     },
     fileReader(file) {
         const isPNG = file.type === 'image/png';
@@ -78,9 +82,10 @@ export default {
 
         reader.onload = () => {
           const img = new Image();
+          const [maxWidth, maxHeight] = [150,150];
           img.src = reader.result;
           img.onload = () => {
-            if (img.width > 150 || img.height > 150) {
+            if (img.width > maxWidth || img.height > maxHeight) {
               this.isOversize = true;
             }
           }
@@ -113,7 +118,6 @@ export default {
     }
   },
   computed: {
-    ...mapState(['progress']),
     isButtonDisabled(){
       return !(this.images.length > 0 && !this.isOversize);
     }

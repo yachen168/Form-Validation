@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProgressBar :progress="progress"></ProgressBar>
+    <ProgressBar :progress="$store.getters.progress"></ProgressBar>
     <div class="title">
       <h1>General Information</h1>
       <span>Tell us who you are!</span>
@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col-6">
           <label for="name">Name <span>(optional)</span></label>
-          <input type="text" placeholder="Example Name">
+          <input type="text" placeholder="Example Name" id="name">
         </div>
         <div class="col-6">
           <div>
@@ -18,7 +18,8 @@
                     type="text" 
                     placeholder="0912 345 678"
                     :value="phoneNumber"
-                    @input="formatPhoneNumber">
+                    @input="formatPhoneNumber"
+                    id="phone">
             <Tooltip v-if="!isPhoneInputWarn">NUMBERS ONLY</Tooltip>
           </div>
         </div>
@@ -97,8 +98,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 import Tooltip from '@/components/Tooltip'
 import service from '@/data/address'
 import ProgressBar from '@/components/ProgressBar'
@@ -130,7 +129,10 @@ import Validation from '@/Validation/Validation'
       toNextPage(){
         if (this.isButtonDisabled){
           this.$router.push({name: 'UpdateProfilePicture'});
-          this.$store.commit('changeStep',['secondStep','thirdStep']);
+          this.$store.commit('changeStep',{
+            currentPage: 'secondStep',
+            nextPage: 'thirdStep'
+          });
         }
       },
       getRegionData(){
@@ -145,7 +147,6 @@ import Validation from '@/Validation/Validation'
       }
     },
     computed: {
-      ...mapState(['progress']),
       isPhoneInputWarn(){
         const checkPhoneNumber = Validation.generalInformation.checkPhoneNumber;
         return !this.phoneNumber || checkPhoneNumber.test(this.phoneNumber.split(' ').join(''));

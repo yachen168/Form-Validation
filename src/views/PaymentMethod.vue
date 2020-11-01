@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProgressBar :progress="progress"></ProgressBar>
+    <ProgressBar :progress="$store.getters.progress"></ProgressBar>
     <div class="title">
       <h1>Payment Method</h1>
       <span>Add your credit card information!</span>
@@ -13,7 +13,8 @@
             <input :class="isCardNumInputWarn ? '' : 'warn'"
                     placeholder="1234 5678 9012 3456"
                     :value="cardNumber"
-                    @input="formatCardNumber">
+                    @input="formatCardNumber"
+                    id="cardNumber">
             <ToolTip v-if="!isCardNumInputWarn">INVALID NUMBER</ToolTip>
           </div>
         </div>
@@ -21,7 +22,7 @@
       <div class="row">
         <div class="col-6">
           <label for="cardholderName">Cardholder Name</label>
-          <input type="text" placeholder="EXAMPLE NAME">
+          <input type="text" placeholder="EXAMPLE NAME" id="cardholderName">
         </div>
         <div class="col-6">
           <div>
@@ -29,7 +30,8 @@
             <input :class="isBankNameInputWarn ? '' : 'warn'" 
                     type="email" 
                     placeholder="EXAMPLE BANK"
-                    v-model="bankName">
+                    v-model="bankName"
+                    id="bankName">
             <ToolTip v-if="!isBankNameInputWarn">REQUIRED FILED</ToolTip>
           </div>
         </div>
@@ -37,10 +39,10 @@
       <div class="row">
         <div class="col-4">
           <label for="cvv">CVV</label>
-          <input type="number" placeholder="123">
+          <input type="number" placeholder="123" id="cvv">
         </div>
         <div class="col-8">
-          <label for="expireDate">Expire Date</label>
+          <div class="select-title">Expire Date</div>
           <div class="row">
             <div class="col-6">
               <select @change="changeColor" name="expireMonth">
@@ -67,8 +69,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 import ToolTip from '@/components/Tooltip'
 import ProgressBar from '@/components/ProgressBar'
 
@@ -89,7 +89,7 @@ export default {
     toNextPage(){
       if(this.isButtonDisabled){
           this.$router.push({name: 'Completed'});
-          this.$store.commit('changeStep',['lastStep']);
+          this.$store.commit('changeStep',{ currentPage: 'lastStep' });
       }
     },
     formatCardNumber(e){
@@ -101,7 +101,6 @@ export default {
     }
   },
   computed: {
-    ...mapState(['progress']),
     isCardNumInputWarn(){
       const checkCardNumber = Validation.paymentMethod.checkCardNumber;
       return !this.cardNumber || checkCardNumber.test(this.cardNumber);
@@ -121,5 +120,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.select-title{
+    margin: 0 auto 5px;
+    font-size: 18px;
+    font-weight: 400;
+}
 </style>

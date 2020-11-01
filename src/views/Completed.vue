@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProgressBar :progress="progress"></ProgressBar>
+    <ProgressBar :progress="$store.getters.progress"></ProgressBar>
     <div class="title">
       <h1>Congratulations</h1>
       <span>Now you’re one of us!</span>
@@ -13,15 +13,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import ProgressBar from '@/components/ProgressBar'
 
 export default {
   components:{
     ProgressBar
-  },
-  computed:{
-    ...mapState(['progress'])
   },
   created(){
     this.setTimeoutId = setTimeout(()=>{

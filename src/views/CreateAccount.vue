@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ProgressBar :progress="progress"></ProgressBar>
+    <ProgressBar :progress="$store.getters.progress"></ProgressBar>
     <div class="title">
       <h1>Create Account</h1>
       <span>Glad to see you here!</span>
@@ -49,7 +49,7 @@
         </div>
       </div>
       <button
-        :class="isButtonDisabled ? '' : 'disabled'"
+        :class="isButtonDisabled ? '' : 'disabled' "
         type="submit"
         @click.prevent="toNextPage"
       >SUBMIT & NEXT</button>
@@ -58,7 +58,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import Tooltip from "@/components/Tooltip";
 import ProgressBar from "@/components/ProgressBar";
 
@@ -81,12 +80,14 @@ export default {
     toNextPage() {
       if (this.isButtonDisabled) {
         this.$router.push({ name: "GeneralInformation" });
-        this.$store.commit("changeStep", ["firstStep", "secondStep"]);
+        this.$store.commit("changeStep", { 
+          currentPage:"firstStep", 
+          nextPage:"secondStep" 
+          });
       }
     },
   },
   computed: {
-    ...mapState(["progress"]),
     isAccountInputWarn() {
       const checkAccount = Validation.creatAccount.checkAccount;
       return !this.account || checkAccount.test(this.account);
