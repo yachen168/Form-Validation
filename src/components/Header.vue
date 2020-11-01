@@ -13,6 +13,6 @@ header {
   height: 5px;
   max-width: 460px;
   margin: 0 auto 50px;
-  background-color: $blue-200;
+  background-color:  #0275D8;
 }
 </style>

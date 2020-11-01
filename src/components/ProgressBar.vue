@@ -41,7 +41,7 @@ li {
   position: relative;
   border-radius: 50%;
   font-size: 16px;
-  color: $blue-100;
+  color: #BEE1FF;
 }
 
 li:not(:first-child)::before {
@@ -49,7 +49,7 @@ li:not(:first-child)::before {
   position: absolute;
   width: 56px;
   height: 2px;
-  background-color: $blue-100;
+  background-color: #BEE1FF;
   right: 100%;
   top: 0;
   bottom: 0;
@@ -57,9 +57,9 @@ li:not(:first-child)::before {
 }
 
 li.isDarkBlue {
-  color: $blue-200;
+  color:  #0275D8;
 }
 li.isDarkBlue::before {
-  background-color: $blue-200;
+  background-color:  #0275D8;
 }
 </style>

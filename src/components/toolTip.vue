@@ -17,15 +17,15 @@
   padding: 5px 8px;
   left: calc(100% + 14px);
   bottom: 32px;
-  background-color: $orange;
+  background-color:  #F5A623;
   font-size: 12px;
-  color: $white;
+  color: #fff;
   border-radius: 4px;
   white-space: nowrap;
   svg{
     position: absolute;
     left: -45px;
-    color: $orange;
+    color:  #F5A623;
     font-size: 18px;
     }
   &::after {
@@ -37,9 +37,8 @@
     top: 0;
     bottom: 0;
     margin: auto 0;
-    background-color: $orange;
+    background-color:  #F5A623;
     clip-path: polygon(0 50%,100% 0, 100% 100%);
-
   }
 }
 </style>

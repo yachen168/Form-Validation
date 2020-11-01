@@ -126,9 +126,9 @@ export default {
   max-width: 460px;
   margin: 20px auto 0;
   padding: 35px 0;
-  border: 2px solid $black;
+  border: 2px solid #000;
   border-radius: 8px;
-  color: $gray;
+  color: #9B9B9B;
   &-input {
     display: flex;
     justify-content: center;
@@ -163,8 +163,8 @@ p {
   margin-top: 25px;
   text-align: center;
   letter-spacing: 1px;
-  color: $white;
-  background-color: $orange;
+  color: #fff;
+  background-color:  #F5A623;
   border-radius: 8px;
   span:first-child {
     margin-right: 10px;
@@ -193,9 +193,9 @@ p {
     width: 100%;
     height: 50px;
     bottom: 0;
-    background-color: $blue-200;
+    background-color:  #0275D8;
     font-size: 20px;
-    color: $white;
+    color: #fff;
     opacity: 0;
     cursor: pointer;
     transition: 0.3s;

@@ -30,11 +30,11 @@ export default {
 <style lang="scss" scoped>
 .icon-wrapper {
   font-size: 210px;
-  color: $blue-100;
+  color: #BEE1FF;
 }
 
 p {
-  color: $blue-200;
+  color:  #0275D8;
   font-size: 18px;
   font-style: italic;
 }
