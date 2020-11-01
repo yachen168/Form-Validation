@@ -1,6 +1,5 @@
 <template>
   <div>
-    <ProgressBar :progress="$store.getters.progress"></ProgressBar>
     <div class="title">
       <h1>Congratulations</h1>
       <span>Now you’re one of us!</span>
@@ -13,26 +12,26 @@
 </template>
 
 <script>
-import ProgressBar from '@/components/ProgressBar'
-
 export default {
-  components:{
-    ProgressBar
+  created() {
+    this.countDownTimer();
   },
-  created(){
-    this.setTimeoutId = setTimeout(()=>{
-        this.$router.push({name: 'Home'});
+  methods: {
+    countDownTimer() {
+      this.setTimeoutId = setTimeout(() => {
+        this.$router.push({ name: "Home" });
         clearTimeout(this.setTimeoutId);
-      },5000)
-  }
-}
+      }, 5000);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 .icon-wrapper {
   font-size: 210px;
   color: $blue-100;
-  }
+}
 
 p {
   color: $blue-200;
