@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import App from './App.vue'
-import store from './store'
-import router from './router'
+import Vue from "vue";
+import App from "./App.vue";
+import store from "./store";
+import router from "./router";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -12,10 +12,10 @@ library.add(fas, far);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
-    router,
-    store,
-    render: h => h(App)
-}).$mount('#app')
+  router,
+  store,
+  render: (h) => h(App),
+}).$mount("#app");
