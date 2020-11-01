@@ -38,12 +38,12 @@ const routes = [
         name: "PaymentMethod",
         component: PaymentMethod,
       },
+      {
+        path: "/Completed",
+        name: "Completed",
+        component: Completed,
+      },
     ],
-  },
-  {
-    path: "/Completed",
-    name: "Completed",
-    component: Completed,
   },
   {
     path: "/Home",
