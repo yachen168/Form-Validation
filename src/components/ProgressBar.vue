@@ -1,24 +1,30 @@
 <template>
-<ul>
-  <li v-for="(step,key) in progress"
+  <ul>
+    <li
+      v-for="(step, key) in progress"
       :key="key"
-      :class="{'isDarkBlue': step}">
-    <font-awesome-icon v-if="step === 'done'" icon="check-circle" />
-    <font-awesome-icon v-else-if="step === 'editing'" :icon="['far','dot-circle']" />  
-    <font-awesome-icon v-else :icon="['far','circle']" />  
-  </li>
-</ul>
+      :class="{ isDarkBlue: step }"
+    >
+      <font-awesome-icon v-if="step === 'done'" icon="check-circle" />
+      <font-awesome-icon
+        v-else-if="step === 'editing'"
+        :icon="['far', 'dot-circle']"
+      />
+      <font-awesome-icon v-else :icon="['far', 'circle']" />
+    </li>
+  </ul>
 </template>
 
 <script>
 export default {
+  name: "ProgressBar",
   props: {
     progress: {
       type: Object,
-      required: true
-      }
-  }
-}
+      required: true,
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -35,11 +41,11 @@ li {
   position: relative;
   border-radius: 50%;
   font-size: 16px;
-  color: $blue-100
+  color: $blue-100;
 }
 
 li:not(:first-child)::before {
-content: '';
+  content: "";
   position: absolute;
   width: 56px;
   height: 2px;
@@ -53,8 +59,7 @@ content: '';
 li.isDarkBlue {
   color: $blue-200;
 }
-li.isDarkBlue::before{
+li.isDarkBlue::before {
   background-color: $blue-200;
 }
-
 </style>
