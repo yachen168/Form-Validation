@@ -1,6 +1,5 @@
 <template>
   <form>
-    <ProgressBar :progress="$store.getters.progress"></ProgressBar>
     <div class="title">
       <h1>Update Profile Picture</h1>
       <span>We wanna know you more!</span>
@@ -42,12 +41,8 @@
 </template>
 
 <script>
-import ProgressBar from '@/components/ProgressBar'
 
 export default {
-  components:{
-    ProgressBar
-  },
   data(){
     return {
       images: [],

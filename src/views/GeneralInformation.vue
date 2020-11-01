@@ -1,6 +1,5 @@
 <template>
   <div>
-    <ProgressBar :progress="$store.getters.progress"></ProgressBar>
     <div class="title">
       <h1>General Information</h1>
       <span>Tell us who you are!</span>
@@ -100,14 +99,13 @@
 <script>
 import Tooltip from '@/components/Tooltip'
 import service from '@/data/address'
-import ProgressBar from '@/components/ProgressBar'
 
 // regExp
 import Validation from '@/Validation/Validation'
 
   export default {
     components: {
-      Tooltip, ProgressBar
+      Tooltip
     },
     data(){
       return {
